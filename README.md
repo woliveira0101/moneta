@@ -1,0 +1,2 @@
+# moneta
+money management, simplified.
