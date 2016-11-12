@@ -8,9 +8,13 @@
     </title>
     <link rel="stylesheet" href="/static/css/materialize.min.css">
     <link rel="stylesheet" href="/static/css/font-awesome.min.css">
+    {% block css %}
+    {% endblock %}
 </head>
 <body>
     {% block content %}
     {% endblock %}
+    <script src='/static/js/jquery.min.js'></script>
+    <script src='/static/js/materialize.min.js'></script>
 </body>
 </html>
