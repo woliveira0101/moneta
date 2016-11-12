@@ -4,16 +4,46 @@
 {% endblock %}
 
 {% block content %}
-<div class="container">
+<div class="container" ng-controller="IndexCtrl">
     <div class="row">
         <div class="col s4 offset-s4">
             <img class="header-logo" src="/static/img/moneta.png">
 
-            <div class="action-btn-group">
-                <a href='#' class="btn">login</a>
-                <a href='#' class="btn green">register</a>
+            <div class="action-btn-group" ng-if="!showLogin && !showRegister">
+                <a href='#' class="btn" ng-click="toggleLogin()">login</a>
+                <a href='#' class="btn green" ng-click="toggleRegister()">register</a>
+            </div>
+
+            <div class="login-form" ng-if="showLogin">
+                <a href="#" ng-click="hideAll()"><i class='fa fa-arrow-left'></i> Back</a>
+                <form action="login/" method="POST">
+                    {{ csrf_input }}
+
+                    <input type="text" name="username" class="form-control" placeholder="username">
+                    <input type="password" name="password" class="form-control" placeholder="password">
+
+                    <input type="submit" class="btn" value="login">
+                </form>
+            </div>
+
+            <div class="register-form" ng-if="showRegister">
+                <a href="#" ng-click="hideAll()"><i class='fa fa-arrow-left'></i> Back</a>
+                <form action="login/" method="POST">
+                    {{ csrf_input }}
+
+                    <input type="text" name="username" class="form-control" placeholder="username">
+                    <input type="text" name="email" class="form-control" placeholder="email">
+
+                    <input type="password" name="password" class="form-control" placeholder="password">
+
+                    <input type="submit" class="btn" value="register">
+                </form>
             </div>
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block js %}
+<script src="/static/js/IndexCtrl.js"></script>
 {% endblock %}
