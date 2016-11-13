@@ -17,7 +17,7 @@
             <div class="login-form" ng-if="showLogin">
                 <a href="#" ng-click="hideAll()"><i class='fa fa-arrow-left'></i> Back</a>
                 <form action="login/" method="POST">
-                    {{ csrf_input }}
+                    {% csrf_token %}
 
                     <input type="text" name="username" class="form-control" placeholder="username">
                     <input type="password" name="password" class="form-control" placeholder="password">
@@ -28,11 +28,11 @@
 
             <div class="register-form" ng-if="showRegister">
                 <a href="#" ng-click="hideAll()"><i class='fa fa-arrow-left'></i> Back</a>
-                <form action="login/" method="POST">
-                    {{ csrf_input }}
+                <form action="register/" method="POST">
+                    {% csrf_token %}
 
                     <input type="text" name="username" class="form-control" placeholder="username">
-                    <input type="text" name="email" class="form-control" placeholder="email">
+                    <input type="email" name="email" class="form-control" placeholder="email">
 
                     <input type="password" name="password" class="form-control" placeholder="password">
 

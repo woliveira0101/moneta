@@ -20,5 +20,13 @@
     <script src='/static/js/base.js'></script>
     {% block js %}
     {% endblock %}
+    <script>
+        {% if messages %}
+            {% for message in messages %}
+                Materialize.toast('{{ message }}', 4000);
+            {% endfor %}
+        {% endif %}
+    </script>
+
 </body>
 </html>
