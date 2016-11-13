@@ -24,7 +24,7 @@ def dashboard(request):
         bank_balance['inst_type'] = bank.inst_type
         bank_balance['inst_name'] = bank.inst_name
 
-        bank_balance_sum = sum([a['balance']['current'] for a in bank_balance['accounts']])
+        bank_balance_sum = sum([a['balance']['current'] for a in bank_balance['accounts'] if a['type'] == 'depository'])
         banks_balance_sum += bank_balance_sum
 
         bank_balance['balance_sum'] = bank_balance_sum
