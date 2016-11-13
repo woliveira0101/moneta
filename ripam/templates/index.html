@@ -6,12 +6,24 @@
 {% block content %}
 <div class="container" ng-controller="IndexCtrl">
     <div class="row">
-        <div class="col s4 offset-s4">
+        <div class="col l8 offset-l2">
             <img class="header-logo" src="/static/img/moneta.png">
+
+            <div class="row intro">
+                <div class="col l6">
+                    moneta helps you organise your accounts, budgets, and credit cards,
+                    all under one umbrella.
+                </div>
+                <div class="col l6">
+                    moneta analyses your spending behavior to predict future spending patterns
+                    and offers suggestions to help you save for what matters most.
+                </div>
+            </div>
 
             <div class="action-btn-group" ng-if="!showLogin && !showRegister">
                 <a href='#' class="btn" ng-click="toggleLogin()">login</a>
                 <a href='#' class="btn green" ng-click="toggleRegister()">register</a>
+                <a href='//github.com/cydrobolt/moneta' class="btn blue">about</a>
             </div>
 
             <div class="login-form" ng-if="showLogin">

@@ -1,6 +1,14 @@
+@import url('https://fonts.googleapis.com/css?family=Arvo');
+
 .action-btn-group a {
     margin-right: 0.6em;
 }
+
 .action-btn-group {
     text-align: center;
+}
+
+.intro {
+    margin-bottom: 3em;
+    font-family: 'Arvo', serif;
 }
