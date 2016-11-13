@@ -44,6 +44,15 @@ def add_bank(request):
 
     papi.exchange_token('{}'.format(public_token))
 
+    # check to ensure user has not previously added bank
+    prev_bank = Bank.objects.filter(
+        access_token=papi.access_token
+    )
+    if len(prev_bank) > 0:
+        # bank already added
+        messages.error(request, 'This bank already exists in moneta.')
+        return redirect(reverse('moneta'))
+
     bank = Bank(
         access_token=papi.access_token,
         inst_name=inst_name,

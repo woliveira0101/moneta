@@ -28,7 +28,15 @@
                                 [[ {{ account.balance.current }} | currency ]]
                             </p>
                             <p>{{ account.meta.name }} x-{{ account.meta.number }}</p>
-                            <a href="#!" class="secondary-content"><i class="fa fa-star-o"></i></a>
+
+                            <div class="secondary-content">
+                                <a href="#!">
+                                    <i class="fa fa-star-o"></i>
+                                </a>
+                                <a href="#!">
+                                    <i class="fa fa-trash-o"></i>
+                                </a>
+                            </div>
                         </li>
                     {% endfor %}
                 {% endfor %}
