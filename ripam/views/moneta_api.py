@@ -14,8 +14,6 @@ def inst_logo(request, inst_type):
 
     try:
         inst = papi.institution_search(institution_id=inst_type).json()
-        print inst
-        print inst == []
         if inst == [] or not inst['logo']:
             raise ValueError
     except ValueError:

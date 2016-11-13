@@ -42,7 +42,7 @@ def add_bank(request):
     inst_name = request.POST.get('institution[name]')
     inst_type = request.POST.get('institution[type]')
 
-    papi.exchange_token('{},{},connected'.format(public_token, inst_type))
+    papi.exchange_token('{}'.format(public_token))
 
     bank = Bank(
         access_token=papi.access_token,
