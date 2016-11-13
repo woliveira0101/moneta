@@ -3,7 +3,9 @@ from views import core, moneta
 
 urlpatterns = [
     url(r'^$', core.index, name='index'),
-    url(r'app/', moneta.dashboard, name='moneta'),
-    url(r'login/', core.login, name='login'),
-    url(r'register/', core.register, name='register')
+    url('^login/$', core.login, name='login'),
+    url('^register/$', core.register, name='register'),
+
+    url('^app/$', moneta.dashboard, name='moneta'),
+    url('^app/add_bank/$', moneta.add_bank, name='moneta-add-bank'),
 ]

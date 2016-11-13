@@ -1,3 +1,7 @@
 from django.contrib import admin
+from .models import Bank
 
-# Register your models here.
+class BankAdmin(admin.ModelAdmin):
+    fields = ['access_token', 'inst_name', 'inst_type', 'owner']
+
+admin.site.register(Bank, BankAdmin)

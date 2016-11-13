@@ -1,1 +1,47 @@
-helo {{user.get_username}}!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container" ng-controller="MonetaCtrl">
+    <div class="row">
+        <div class="col s4 offset-s4">
+            <img class="header-logo" src="/static/img/moneta.png">
+            <h2 class="balance">
+                $<span ng-bind="banksBalanceSum"></span>
+            </h2>
+            <p>Accounts</p>
+
+            <!-- Fetch dynamically -->
+            {% for bank in banks %}
+                <h1>Bank</h1>
+                {% for account in bank.accounts %}
+                    <h2>Account</h2>
+                    {{account}}
+                {% endfor %}
+            {% endfor %}
+
+
+            <form id="moneta-add-bank-form" method="POST" action="/app/add_bank/">
+                {% csrf_token %}
+            </form>
+
+            <script
+                src="https://cdn.plaid.com/link/stable/link-initialize.js"
+                data-client-name="moneta"
+                data-form-id="moneta-add-bank-form"
+                data-key="1d7a48b2f04b1f7b2f6b97ec1656a1"
+                data-product="connect"
+                data-env="tartan">
+            </script>
+        </div>
+    </div>
+</div>
+
+<script>
+    var totalBanksSum = {{banks_balance_sum}};
+</script>
+{% endblock %}
+
+{% block js %}
+<script src='/static/js/jquery.observe.js'></script>
+<script src='/static/js/MonetaCtrl.js'></script>
+{% endblock %}
