@@ -13,6 +13,11 @@
     {% endblock %}
 </head>
 <body>
+    {% if user.is_authenticated %}
+        <div class="logout right">
+                <a href="/logout">Logout</a>
+        </div>
+    {% endif %}
     {% block content %}
     {% endblock %}
     <script src='/static/js/jquery.min.js'></script>

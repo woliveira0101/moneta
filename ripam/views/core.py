@@ -2,6 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect, reverse
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as _login
+from django.contrib.auth import logout as _logout
 from django.contrib.auth.models import User
 from django.contrib import messages
 
@@ -41,3 +42,8 @@ def register(request):
 
     messages.success(request, 'Account successfully created!')
     return render(request, 'index.html')
+
+def logout(request):
+    _logout(request)
+    messages.success(request, 'Successfully logged out.')
+    return redirect(reverse('index'))

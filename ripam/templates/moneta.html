@@ -1,24 +1,44 @@
 {% extends "layout.html" %}
 
+{% block css %}
+<link rel="stylesheet" href="/static/css/moneta.css">
+{% endblock %}
+
 {% block content %}
 <div class="container" ng-controller="MonetaCtrl">
     <div class="row">
         <div class="col s4 offset-s4">
             <img class="header-logo" src="/static/img/moneta.png">
+
+            <p class="grey-text">Current Balance</p>
             <h2 class="balance">
-                $<span ng-bind="banksBalanceSum"></span>
+                [[ {{ banks_balance_sum }} | currency ]]
             </h2>
-            <p>Accounts</p>
 
-            <!-- Fetch dynamically -->
-            {% for bank in banks %}
-                <h1>Bank</h1>
-                {% for account in bank.accounts %}
-                    <h2>Account</h2>
-                    {{account}}
+            <!-- {{ banks }} -->
+            <ul class="collection">
+                {% for bank in banks %}
+                    {% for account in bank.accounts %}
+                        <li class="collection-item avatar">
+                            <img src="/api/v1/inst_logo/{{ bank.inst_type }}"
+                                alt="{{ bank.inst_name }} Logo" class="circle">
+
+                            <span class="title">{{ bank.inst_name }}</span>
+                            <p>
+                                [[ {{ account.balance.current }} | currency ]]
+                            </p>
+                            <p>{{ account.meta.name }} x-{{ account.meta.number }}</p>
+                            <a href="#!" class="secondary-content"><i class="fa fa-star-o"></i></a>
+                        </li>
+                    {% endfor %}
                 {% endfor %}
-            {% endfor %}
+            </ul>
 
+            <div class="action-btn-group">
+                <a href="#" class="btn blue">summary</a>
+                <a href="#" class="btn orange">transactions</a>
+                <a href="#" class="btn red">budgets</a>
+            </div>
 
             <form id="moneta-add-bank-form" method="POST" action="/app/add_bank/">
                 {% csrf_token %}
@@ -35,10 +55,6 @@
         </div>
     </div>
 </div>
-
-<script>
-    var totalBanksSum = {{banks_balance_sum}};
-</script>
 {% endblock %}
 
 {% block js %}

@@ -2,22 +2,16 @@ from django.shortcuts import render, redirect, reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.http import HttpResponse
-from ripam.models import Bank
 
-from plaid import Client
+from ripam.models import Bank
+from ripam.util import init_papi
+
 from plaid import errors as plaid_errors
 
-Client.config({
-    'url': 'https://tartan.plaid.com'
-})
-papi = Client(
-    client_id='5827660d46eb126b6a860a67',
-    secret='f1e0953b41311a09b83023f81df297'
-)
+papi = init_papi()
 
 @login_required
 def dashboard(request):
-    print request.user
     banks = Bank.objects.filter(
         owner=request.user
     )
@@ -33,6 +27,8 @@ def dashboard(request):
         bank_balance_sum = sum([a['balance']['current'] for a in bank_balance['accounts']])
         banks_balance_sum += bank_balance_sum
 
+        bank_balance['balance_sum'] = bank_balance_sum
+
         banks_fetched.append(bank_balance)
 
     return render(request, 'moneta.html', {
@@ -46,10 +42,7 @@ def add_bank(request):
     inst_name = request.POST.get('institution[name]')
     inst_type = request.POST.get('institution[type]')
 
-    response = papi.exchange_token('{},{},connected'.format(public_token, inst_type))
-    print papi.balance().json()
-    print "ACCESS TOKEN!!!============="
-    print papi.access_token
+    papi.exchange_token('{},{},connected'.format(public_token, inst_type))
 
     bank = Bank(
         access_token=papi.access_token,
@@ -58,3 +51,5 @@ def add_bank(request):
         owner=request.user
     )
     bank.save()
+
+    return redirect(reverse('moneta'))
