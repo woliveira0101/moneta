@@ -26,7 +26,7 @@
                 <a href='//github.com/cydrobolt/moneta' class="btn blue">about</a>
             </div>
 
-            <div class="login-form" ng-if="showLogin">
+            <div class="login-form" ng-cloak ng-if="showLogin">
                 <a href="#" ng-click="hideAll()"><i class='fa fa-arrow-left'></i> Back</a>
                 <form action="login/" method="POST">
                     {% csrf_token %}
@@ -38,7 +38,7 @@
                 </form>
             </div>
 
-            <div class="register-form" ng-if="showRegister">
+            <div class="register-form" ng-cloak ng-if="showRegister">
                 <a href="#" ng-click="hideAll()"><i class='fa fa-arrow-left'></i> Back</a>
                 <form action="register/" method="POST">
                     {% csrf_token %}
