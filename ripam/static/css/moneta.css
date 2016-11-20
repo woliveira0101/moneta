@@ -3,6 +3,10 @@
     margin-bottom: 0.8em;
 }
 
+select.input-sm {
+    display: inline-block;
+}
+
 .container {
     margin-bottom: 3em;
 }

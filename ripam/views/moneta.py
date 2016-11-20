@@ -62,3 +62,20 @@ def add_bank(request):
     bank.save()
 
     return redirect(reverse('moneta'))
+
+@login_required
+def list_transactions(request):
+    banks = Bank.objects.filter(
+        owner=request.user
+    )
+
+    concat_transactions = []
+    for bank in banks:
+        papi.access_token = bank.access_token
+        # fetch transaction lists for each bank
+        transactions = papi.connect_get().json()['transactions']
+        concat_transactions += transactions
+
+    return render(request, 'transactions.html', {
+        'transactions': concat_transactions
+    })

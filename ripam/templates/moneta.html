@@ -15,7 +15,6 @@
                 [[ {{ banks_balance_sum }} | currency ]]
             </h2>
 
-            <!-- {{ banks }} -->
             <ul class="collection">
                 {% for bank in banks %}
                     {% for account in bank.accounts %}
@@ -44,7 +43,7 @@
 
             <div class="action-btn-group">
                 <a href="#" class="btn blue">summary</a>
-                <a href="#" class="btn orange">transactions</a>
+                <a href="transactions" class="btn orange">transactions</a>
                 <a href="#" class="btn red">budgets</a>
             </div>
 

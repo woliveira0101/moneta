@@ -1,0 +1,62 @@
+{% extends "layout.html" %}
+
+{% block css %}
+<link rel="stylesheet" href="/static/css/moneta.css">
+<link rel="stylesheet" href="/static/css/material.min.css">
+<link rel="stylesheet" href="/static/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="/static/css/dataTables.material.min.css">
+{% endblock %}
+
+{% block content %}
+<div class="container" ng-controller="TransactionsCtrl">
+    <div class="row">
+        <div class="col l10 offset-l1">
+            <img class="header-logo" src="/static/img/moneta.png">
+
+            <table class="striped transactions-table">
+                <thead>
+                    <th>Date</th>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <!-- Some of these are optional -->
+                    <th>Location</th>
+                    <th>Pending</th>
+                </thead>
+                <tbody>
+                    {% for t in transactions %}
+                        <tr>
+                            <td>{{ t.date }}</td>
+                            <td>{{ t.name }}</td>
+                            <td>
+                                <!-- Category -->
+                            </td>
+                            <td>
+                                {% if t.meta.location %}
+                                    {{ t.meta.location.city }}, {{ t.meta.location.state }}
+                                {% else %}
+                                    N/A
+                                {% endif %}
+                            </td>
+                            <td>{{ t.pending }}</td>
+                        </tr>
+                    {% endfor %}
+                </thead>
+            </table>
+
+
+            <div class="action-btn-group">
+                <a href="#" class="btn blue">summary</a>
+                <a href="transactions" class="btn orange">transactions</a>
+                <a href="#" class="btn red">budgets</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block js %}
+<script src='/static/js/jquery.dataTables.min.js'></script>
+<script src='/static/js/dataTables.material.min.js'></script>
+
+<script src='/static/js/TransactionsCtrl.js'></script>
+{% endblock %}
