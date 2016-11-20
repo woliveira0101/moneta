@@ -28,7 +28,16 @@
                             <td>{{ t.date }}</td>
                             <td>{{ t.name }}</td>
                             <td>
-                                <!-- Category -->
+                                {% if t.category %}
+                                    {% for subcategory in t.category %}
+                                        {{ subcategory }}
+                                        {% if not forloop.last %}
+                                            >
+                                        {% endif %}
+                                    {% endfor %}
+                                {% else %}
+                                    N/A
+                                {% endif %}
                             </td>
                             <td>
                                 {% if t.meta.location %}
