@@ -20,7 +20,7 @@
                     <th>Category</th>
                     <!-- Some of these are optional -->
                     <th>Location</th>
-                    <th>Pending</th>
+                    <th>Status</th>
                 </thead>
                 <tbody>
                     {% for t in transactions %}
@@ -46,7 +46,13 @@
                                     N/A
                                 {% endif %}
                             </td>
-                            <td>{{ t.pending }}</td>
+                            <td>
+                                {% if t.pending %}
+                                    <i class='fa fa-clock-o'></i>
+                                {% else %}
+                                    <i class='fa fa-check'></i>
+                                {% endif %}
+                            </td>
                         </tr>
                     {% endfor %}
                 </thead>
