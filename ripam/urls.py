@@ -9,6 +9,8 @@ urlpatterns = [
 
     url('^app/$', moneta.dashboard, name='moneta'),
     url('^app/transactions/$', moneta.list_transactions, name='list_transactions'),
+    url('^app/budgets/$', moneta.budgets, name='budgets'),
+
     url('^app/add_bank/$', moneta.add_bank, name='add_bank'),
 
     url('^api/v1/inst_logo/(?P<inst_type>\w+)$', moneta_api.inst_logo, name='api_inst_logo'),

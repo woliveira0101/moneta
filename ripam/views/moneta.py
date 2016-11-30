@@ -79,3 +79,9 @@ def list_transactions(request):
     return render(request, 'transactions.html', {
         'transactions': concat_transactions
     })
+
+@login_required
+def budgets(request):
+    budgets = Budget.objects.filter(
+        owner=request.user
+    )
