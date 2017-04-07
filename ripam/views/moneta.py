@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.http import HttpResponse
 
-from ripam.models import Bank
+from ripam.models import *
 from ripam.util import init_papi
 
 from plaid import errors as plaid_errors
