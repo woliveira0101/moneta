@@ -20,6 +20,7 @@
                     <th>Category</th>
                     <!-- Some of these are optional -->
                     <th>Location</th>
+                    <th>Amount</th>
                     <th>Status</th>
                 </thead>
                 <tbody>
@@ -45,6 +46,9 @@
                                 {% else %}
                                     N/A
                                 {% endif %}
+                            </td>
+                            <td>
+                                {{ t.amount }}
                             </td>
                             <td>
                                 {% if t.pending %}
