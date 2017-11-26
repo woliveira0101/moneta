@@ -41,7 +41,7 @@ def register(request):
     user.save()
 
     messages.success(request, 'Account successfully created!')
-    return render(request, 'index.html')
+    return redirect(reverse('index'))
 
 def logout(request):
     _logout(request)

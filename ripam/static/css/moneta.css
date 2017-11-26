@@ -10,3 +10,15 @@ select.input-sm {
 .container {
     margin-bottom: 3em;
 }
+
+.transaction-amount {
+    font-weight: bold;
+}
+
+.transaction-amount__withdrawal {
+    color: red;
+}
+
+.transaction-amount__deposit {
+    color: green;
+}

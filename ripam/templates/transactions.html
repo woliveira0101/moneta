@@ -1,4 +1,6 @@
 {% extends "layout.html" %}
+{% load mathfilters %}
+{% load humanize %}
 
 {% block css %}
 <link rel="stylesheet" href="/static/css/moneta.css">
@@ -47,8 +49,16 @@
                                     N/A
                                 {% endif %}
                             </td>
-                            <td>
-                                {{ t.amount }}
+                            <td class="transaction-amount">
+                                {% if t.amount > 0 %}
+                                    <span class="transaction-amount__withdrawal">
+                                        {{ t.amount }}
+                                    </span>
+                                {% else %}
+                                    <span class="transaction-amount__deposit">
+                                        {{ t.amount | abs | floatformat:2 | intcomma }}
+                                    </span>
+                                {% endif %}
                             </td>
                             <td>
                                 {% if t.pending %}

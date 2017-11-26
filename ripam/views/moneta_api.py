@@ -1,10 +1,9 @@
 import base64
 
-from django.http import HttpResponse, HttpResponseNotFound
+from django.http import HttpResponse
 from django.contrib.staticfiles.views import serve
 
 from ripam.util import init_papi
-from plaid import errors as plaid_errors
 
 papi = init_papi()
 
