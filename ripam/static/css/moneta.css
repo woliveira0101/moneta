@@ -23,11 +23,15 @@ select.input-sm {
     color: green;
 }
 
-.budget-type-select {
+.budget-add__select {
     width: 25em;
 }
 
-.budget-type-select__container {
+.budget-add__title {
+    display: inline;
+}
+
+.budget-add__select-container {
     margin-left: 1em;
 }
 
