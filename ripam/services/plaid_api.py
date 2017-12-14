@@ -1,7 +1,8 @@
-from plaid import Client
 from django.conf import settings
+from plaid import Client
 
-def init_papi():
+
+def get_plaid_client():
     Client.config({
         'url': settings.PLAID_API_URL
     })

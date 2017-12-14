@@ -22,3 +22,19 @@ select.input-sm {
 .transaction-amount__deposit {
     color: green;
 }
+
+.budget-type-select {
+    width: 25em;
+}
+
+.budget-type-select__container {
+    margin-left: 1em;
+}
+
+.select2-selection__rendered {
+    line-height: 3em !important;
+}
+
+.select2-selection.select2-selection--single, .select2-selection__arrow {
+    height: 3em !important;
+}

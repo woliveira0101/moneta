@@ -1,18 +1,18 @@
 import base64
 
-from django.http import HttpResponse
 from django.contrib.staticfiles.views import serve
+from django.http import HttpResponse
 
-from ripam.util import init_papi
+from ripam.services.plaid_api import get_plaid_client
 
-papi = init_papi()
+plaid_client = get_plaid_client()
 
 def inst_logo(request, inst_type):
     # Return institution logo
     # given institution type
 
     try:
-        inst = papi.institution_search(institution_id=inst_type).json()
+        inst = plaid_client.institution_search(institution_id=inst_type).json()
         if inst == [] or not inst['logo']:
             raise ValueError
     except ValueError:

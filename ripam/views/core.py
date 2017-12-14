@@ -1,10 +1,10 @@
-from django.http import HttpResponse
-from django.shortcuts import render, redirect, reverse
-from django.contrib.auth import authenticate
+from django.contrib import messages
 from django.contrib.auth import login as _login
 from django.contrib.auth import logout as _logout
+from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
-from django.contrib import messages
+from django.http import HttpResponse
+from django.shortcuts import redirect, render, reverse
 
 
 def index(request):

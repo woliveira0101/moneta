@@ -1,14 +1,12 @@
-from django.shortcuts import render, redirect, reverse
-from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import redirect, render, reverse
 
-from ripam.models import *
-from ripam.util import init_papi
+from ripam.services.plaid_api import get_plaid_client
+from ripam.services.transactions import TransactionService
+from ripam.models import Bank
 
-from plaid import errors as plaid_errors
-
-papi = init_papi()
+plaid_client = get_plaid_client()
 
 @login_required
 def dashboard(request):
@@ -19,8 +17,8 @@ def dashboard(request):
     banks_balance_sum = 0
 
     for bank in banks:
-        papi.access_token = bank.access_token
-        bank_balance = papi.balance().json()
+        plaid_client.access_token = bank.access_token
+        bank_balance = plaid_client.balance().json()
         bank_balance['inst_type'] = bank.inst_type
         bank_balance['inst_name'] = bank.inst_name
 
@@ -42,11 +40,11 @@ def add_bank(request):
     inst_name = request.POST.get('institution[name]')
     inst_type = request.POST.get('institution[type]')
 
-    papi.exchange_token('{}'.format(public_token))
+    plaid_client.exchange_token('{}'.format(public_token))
 
     # check to ensure user has not previously added bank
     prev_bank = Bank.objects.filter(
-        access_token=papi.access_token
+        access_token=plaid_client.access_token
     )
     if len(prev_bank) > 0:
         # bank already added
@@ -54,7 +52,7 @@ def add_bank(request):
         return redirect(reverse('moneta'))
 
     bank = Bank(
-        access_token=papi.access_token,
+        access_token=plaid_client.access_token,
         inst_name=inst_name,
         inst_type=inst_type,
         owner=request.user
@@ -69,19 +67,11 @@ def list_transactions(request):
         owner=request.user
     )
 
-    concat_transactions = []
+    transactions = []
     for bank in banks:
-        papi.access_token = bank.access_token
-        # fetch transaction lists for each bank
-        transactions = papi.connect_get().json()['transactions']
-        concat_transactions += transactions
+        bank_transaction_service = TransactionService(bank.access_token)
+        transactions += bank_transaction_service.get_transactions()
 
     return render(request, 'transactions.html', {
-        'transactions': concat_transactions
+        'transactions': transactions
     })
-
-@login_required
-def budgets(request):
-    budgets = Budget.objects.filter(
-        owner=request.user
-    )

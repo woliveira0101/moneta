@@ -1,5 +1,6 @@
 from django.conf.urls import url
-from views import core, moneta, moneta_api
+
+from views import core, moneta, moneta_api, budgets
 
 urlpatterns = [
     url(r'^$', core.index, name='index'),
@@ -9,7 +10,9 @@ urlpatterns = [
 
     url('^app/$', moneta.dashboard, name='moneta'),
     url('^app/transactions/$', moneta.list_transactions, name='list_transactions'),
-    url('^app/budgets/$', moneta.budgets, name='budgets'),
+    url('^app/budgets/$', budgets.list_budgets, name='budgets'),
+
+    url('^app/budgets/add_budget/$', budgets.add_budget, name='add_budget'),
 
     url('^app/add_bank/$', moneta.add_bank, name='add_bank'),
 

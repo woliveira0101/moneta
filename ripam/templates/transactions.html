@@ -52,11 +52,11 @@
                             <td class="transaction-amount">
                                 {% if t.amount > 0 %}
                                     <span class="transaction-amount__withdrawal">
-                                        {{ t.amount }}
+                                        -${{ t.amount | floatformat:2 | intcomma }}
                                     </span>
                                 {% else %}
                                     <span class="transaction-amount__deposit">
-                                        {{ t.amount | abs | floatformat:2 | intcomma }}
+                                        +${{ t.amount | abs | floatformat:2 | intcomma }}
                                     </span>
                                 {% endif %}
                             </td>

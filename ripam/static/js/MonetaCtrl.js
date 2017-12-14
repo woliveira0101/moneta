@@ -1,4 +1,4 @@
-moneta.controller('MonetaCtrl', function($scope, $compile) {
+moneta.controller('MonetaCtrl', function($scope) {
     $scope.init = function () {
         var plaidBtnActivated = false;
         $('body')
